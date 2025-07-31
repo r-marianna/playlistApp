@@ -15,8 +15,7 @@ test.describe('Search Functionality', () => {
 
   test('Total duration of all tracks in "Your Playlist" is accurately calculated', async ({ page }) => {
     await playlistPage.clickPlusButtonForAllAndAssert(list)
-    // const total = await playlistPage.calculateTotalInThePlaylist();
-    await playlistPage.assertTotalTimeIsCorrect('1030');
+    await playlistPage.assertTotalTimeIsCorrect();
   });
 
 })
