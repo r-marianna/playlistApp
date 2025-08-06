@@ -59,27 +59,27 @@ export class PlaylistPage {
   }
 
   async calculateTotalInThePlaylist() {
-    await test.step('Calculate total', async () => {
-      const count = await this.tracklistYourPlaylist.count();
-      let sum = 0;
+    const count = await this.tracklistYourPlaylist.count();
+    let sum = 0;
 
-      for (let i = 0; i < count; i++) {
-        // console.log(await this.tracklistYourPlaylist.nth(i).locator('p').nth(1).innerHTML());
+    for (let i = 0; i < count; i++) {
+      // console.log(await this.tracklistYourPlaylist.nth(i).locator('p').nth(1).innerHTML());
 
-        const timeElement = this.tracklistYourPlaylist.nth(i).locator('p').nth(1);
-        const timeText = await timeElement.textContent();
+      const timeElement = this.tracklistYourPlaylist.nth(i).locator('p').nth(1);
+      const timeText = await timeElement.textContent();
 
-        const [minutes, seconds] = timeText.split(':').map(Number);;
-        sum += minutes * 60 + seconds;
-      }
+      const [minutes, seconds] = timeText.split(':').map(Number);;
+      sum += minutes * 60 + seconds;
+    }
 
-      return sum;
-    });
+    return sum;
   }
 
 
-  async assertTotalTimeIsCorrect(total) {
+  async assertTotalTimeIsCorrect() {
     await test.step('Assert track appears in the list after clicking +', async () => {
+      const total = await this.calculateTotalInThePlaylist();
+
       await expect(this.totalTime).toHaveText(String(total));
     })
   }
